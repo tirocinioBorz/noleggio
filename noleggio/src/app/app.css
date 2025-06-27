@@ -1,3 +1,4 @@
+/* Stile globale per tutti gli elementi: imposta il font principale e le sue proprietà */
 * {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -5,6 +6,7 @@
     font-style: normal;
 }
 
+/* Rimuove il margine di default dal body per un layout più pulito */
 body {
     margin: 0;
 }

@@ -13,21 +13,22 @@ import { Notfound } from '../notfound/notfound';
   styleUrls: ['./occasione.css']
 })
 export class Occasione implements OnInit, OnDestroy {
-  prodotto: any;
-  loading = true;
-  notFound = false;
+  prodotto: any; // Prodotto corrente visualizzato
+  loading = true; // Stato di caricamento
+  notFound = false; // Stato per prodotto non trovato
 
-  private routeSub!: Subscription;
-  private prodSub!: Subscription;
+  private routeSub!: Subscription; // Subscription ai parametri della route
+  private prodSub!: Subscription; // Subscription al prodotto
 
   constructor(
-    private route: ActivatedRoute,
-    private occasioneService: OccasioneService
+    private route: ActivatedRoute, // Iniezione della route per leggere i parametri
+    private occasioneService: OccasioneService // Iniezione del servizio prodotti
   ) { }
 
   ngOnInit(): void {
+    // Sottoscrizione ai cambiamenti dei parametri della route
     this.routeSub = this.route.paramMap.subscribe(params => {
-      const sku = params.get('sku');
+      const sku = params.get('sku'); // Recupera SKU dalla route
       console.log('SKU cambiato:', sku);
 
       this.loading = true;
@@ -35,24 +36,28 @@ export class Occasione implements OnInit, OnDestroy {
       this.prodotto = null;
 
       if (sku) {
+        // Se lo SKU è presente, recupera il prodotto dal servizio
         this.prodSub = this.occasioneService.getProdottoBySku(sku).subscribe({
           next: prodotto => {
             if (prodotto) {
-              this.prodotto = prodotto;
+              this.prodotto = prodotto; // Prodotto trovato
               console.log('Prodotto caricato:', prodotto);
             } else {
+              // Prodotto non trovato
               console.error('Prodotto non trovato per SKU:', sku);
               this.notFound = true;
             }
             this.loading = false;
           },
           error: error => {
+            // Errore nel recupero del prodotto
             console.error('Errore recupero prodotto:', error);
             this.loading = false;
             this.notFound = true;
           }
         });
       } else {
+        // SKU mancante nella route
         console.error('SKU mancante nella route');
         this.loading = false;
         this.notFound = true;
@@ -61,6 +66,7 @@ export class Occasione implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // Disiscrive le subscription per evitare memory leak
     this.routeSub?.unsubscribe();
     this.prodSub?.unsubscribe();
   }
