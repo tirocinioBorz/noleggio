@@ -1,0 +1,89 @@
+<div class="bg-white py-2">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+
+        <a class="navbar-brand m-0 p-0" [routerLink]="['/']" routerLinkActive="active">
+            <img src="/BorzLogo.png" alt="Logo Borz" class="img-fluid m-2" style="max-height:60px;">
+        </a>
+
+        <div class="d-flex flex-column flex-md-row align-items-center mt-2 mt-md-0">
+            <a href="https://www.borz.it/" target="_blank" class="small d-flex align-items-center me-md-4 m-2">
+                <i class="bi bi-cart3 me-1" style="font-size:20px;"></i>
+                Clicca qui per visitare il negozio online!
+            </a>
+            <a href="tel:+390464437719" class="small d-flex align-items-center me-md-4 m-2">
+                <i class="bi bi-telephone me-1" style="font-size:20px;"></i>
+                +39 0464 437719
+            </a>
+            <a href="mailto:info@borz.it" class="small d-flex m-2 align-items-center">
+                <i class="bi bi-envelope me-1" style="font-size:20px;"></i>
+                info&#64;borz.it
+            </a>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-top border-bottom shadow-sm sticky-top py-2">
+    <div class="container-fluid px-3 px-sm-4">
+        <div class="d-flex d-lg-none w-100 align-items-center">
+            <input type="text" class="form-control mx-2 my-2" placeholder="Cerca un prodotto..."
+                [formControl]="searchInput">
+            @if(filteredProdotti.length > 0) {
+                <ul class="list-group position-absolute top-100 w-80 mx-4" style="z-index: 1000;">
+                    @for(p of filteredProdotti; track p) {
+                        <a [routerLink]="['/occasione', p.sku]" style="border-radius: 10px;" class="my-1">
+                            <li class="list-group-item list-group-item-action mx-2"
+                                (click)="searchInput.setValue(''); filteredProdotti = [];">
+                                {{ p.post_title }}
+                            </li>
+                        </a>
+                    }
+                </ul>
+            }
+
+            <button class="navbar-toggler mx-2 my-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu"
+                aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navbar-nav mx-auto mb-3 mb-lg-0">
+                <li class="nav-item"><a class="nav-link mx-4 my-2" [routerLink]="['/']" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+                <li class="nav-item"><a class="nav-link mx-4 my-2" [routerLink]="['/cottura']"
+                        routerLinkActive="active">Cottura</a></li>
+                <li class="nav-item"><a class="nav-link mx-4 my-2" [routerLink]="['/preparazione']"
+                        routerLinkActive="active">Preparazione</a></li>
+                <li class="nav-item"><a class="nav-link mx-4 my-2" [routerLink]="['/lavaggio']"
+                        routerLinkActive="active">Lavaggio</a></li>
+                <li class="nav-item"><a class="nav-link mx-4 my-2" [routerLink]="['/refrigerazione']"
+                        routerLinkActive="active">Refrigerazione</a></li>
+                <li class="nav-item"><a class="nav-link mx-4 my-2" [routerLink]="['/lavelli']"
+                        routerLinkActive="active">Lavelli</a></li>
+                <li class="nav-item"><a class="nav-link mx-4 my-2" [routerLink]="['/bar']" routerLinkActive="active">Bar
+                        e accessori</a></li>
+                <li class="nav-item"><a class="nav-link mx-4 my-2" [routerLink]="['/contatti']"
+                        routerLinkActive="active">Contatti</a></li>
+            </ul>
+
+            <form class="d-none d-lg-flex ms-lg-3 position-relative" role="search">
+                <div class="input-group flex-nowrap mx-4 my-2 w-100">
+                    <input type="text" class="form-control" placeholder="Cerca un prodotto..."
+                        [formControl]="searchInput">
+                </div>
+                @if(filteredProdotti.length > 0) {
+                    <ul class="list-group position-absolute top-100 w-80 mx-4" style="z-index: 1000;">
+                        @for(p of filteredProdotti; track p) {
+                            <a [routerLink]="['/occasione', p.sku]" style="border-radius: 10px;" class="my-1">
+                                <li class="list-group-item list-group-item-action"
+                                    (click)="searchInput.setValue(''); filteredProdotti = [];">
+                                    {{ p.post_title }}
+                                </li>
+                            </a>
+                        }
+                    </ul>
+                }
+            </form>
+        </div>
+    </div>
+</nav>

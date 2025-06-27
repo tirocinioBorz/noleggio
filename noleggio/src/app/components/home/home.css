@@ -1,0 +1,145 @@
+* {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+}
+
+.nav-link {
+    color: #00a0e4;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+    color: #fcb800;
+    cursor: pointer;
+}
+
+/* Riduce margini su mobile, allinea bene tutte le voci */
+@media (max-width: 991px) {
+    .navbar-nav.flex-row {
+        flex-wrap: wrap;
+    }
+
+    .navbar-nav.flex-row .nav-item {
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+hr {
+    border: 1px solid #e0e0e0;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #212529;
+}
+
+#heroCarousel .carousel-caption {
+    bottom: 15%;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 768px) {
+    #heroCarousel .carousel-caption h2 {
+        font-size: 2.5rem;
+    }
+
+    #heroCarousel .carousel-caption p {
+        font-size: 1.25rem;
+    }
+}
+
+.brand-slider {
+    width: 100%;
+    padding: 1rem 0;
+    background: #fff;
+    overflow-x: hidden;
+    height: 320px;
+}
+
+.brand-track {
+    display: flex;
+    width: max-content;
+    animation: scrollBrands 40s linear infinite;
+}
+
+.brand-slide {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.brand-slide img {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+@keyframes scrollBrands {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .brand-slide {
+        width: 120px;
+        margin-right: 1rem;
+    }
+}
+
+.parallax-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Per mobile, evitare problemi di performance: */
+@media (max-width: 767px) {
+    .parallax-section {
+        background-attachment: scroll;
+    }
+}
+
+.btn-progetto {
+    background-color: #00a0e4;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+}
+
+.btn-progetto:hover {
+    background-color: #fcb800;
+}
+
+.card.h-100 {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img-overlay {
+    bottom: 0;
+}
+
+.swiper.logo-slider .swiper-slide {
+    background-color: #fff !important;
+}
+
+.brands-section {
+    background-color: white !important;
+}

@@ -1,0 +1,26 @@
+@media (max-width: 991px) {
+    .navbar-nav.flex-row {
+        flex-wrap: wrap;
+    }
+
+    .navbar-nav.flex-row .nav-item {
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+a,
+.nav-link {
+    cursor: pointer;
+    text-decoration: none;
+    color: #212529;
+}
+
+a:hover,
+.nav-link:hover {
+    color: #fcb800;
+}
+
+.nav-link.active {
+    color: #fcb800 !important;
+}

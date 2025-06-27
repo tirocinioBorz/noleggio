@@ -1,0 +1,63 @@
+@if(loading) {
+    <div class="d-flex justify-content-center my-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+}
+@else {
+    @if (!notFound) {
+        <div class="container py-5">
+            <div class="row gx-5 align-items-center">
+
+                <!-- Colonna immagine -->
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="ratio ratio-4x3 shadow rounded overflow-hidden">
+                        <a [href]="prodotto.images?.split(' ')[0]" target="_blank" rel="noopener noreferrer"
+                            class="d-block h-100">
+                            <img [src]="prodotto.images?.split(' ')[0]" [alt]="prodotto.post_title"
+                                class="img-fluid h-100 w-100 object-fit-contain" style="cursor: zoom-in;" />
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h2 class="mb-3">{{ prodotto.post_title }}</h2>
+                    <p class="lead" [innerHTML]="prodotto.post_excerpt"></p>
+
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">
+                            <strong>Dimensioni (L×P×A):</strong>
+                            {{ prodotto.length }} × {{ prodotto.width }} × {{ prodotto.height }}
+                            cm
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Marca:</strong> {{ prodotto['attribute:Marca'] }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>SKU:</strong> {{ prodotto.sku }}
+                        </li>
+                    </ul>
+
+                    <div class="d-flex justify-content-center">
+                        <a [routerLink]="['/contatti', prodotto.post_title]" class="btn btn-lg" style="background-color: #fcb800; color: white;">
+                            Richiedi preventivo
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    }
+    @else {
+        <div class="container text-center py-5">
+            <h1 class="display-1" style="color: #00a0e4">404</h1>
+            <p class="fs-3">Prodotto non trovato</p>
+            <p class="text-muted">
+                Il prodotto che stai cercando non esiste o è stato rimosso.
+            </p>
+            <a routerLink="/" class="btn mt-3" style="background-color: #fcb800; color: white">Torna alla home</a>
+        </div>
+    }
+}
